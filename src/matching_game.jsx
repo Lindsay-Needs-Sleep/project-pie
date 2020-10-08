@@ -50,7 +50,7 @@ class MatchingGame extends Component {
           self.setState({ victory: true });
         }
       }
-    }, 2000);
+    }, matched? 0 : 1200);
 
   }
 
