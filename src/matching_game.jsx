@@ -27,25 +27,31 @@ class MatchingGame extends Component {
       return;
     }
 
-    // Else we have a selectedCard, so compare to 2nd selected card
-    const matched = this.selectedCard.color === card.color 
-    && this.selectedCard.number === card.number;
-    
-    // Notify the cards about whether they were matched or not    
-    this.selectedCard.foundMatch(matched);
-    card.foundMatch(matched);
-
-    // If matched we should decrement the unmatched cards
-    if (matched) {
-      this.unmatchedCards -= 2;
-      // And check for the victory condition
-      if (this.unmatchedCards <= 0) {
-        this.setState({ victory: true });
-      }
-    }
-
+    const self = this;
+    const selectedCard = this.selectedCard;
     // Reset the selected card so we can start the next pair
     this.selectedCard = null;
+
+    // Else we have a selectedCard, so compare to 2nd selected card
+    const matched = selectedCard.color === card.color && selectedCard.number === card.number;    
+
+    // Delay indicating cards as matched or failed
+    setTimeout(function () {
+
+      // Notify the cards about whether they were matched or not    
+      selectedCard.foundMatch(matched);
+      card.foundMatch(matched);
+  
+      // If matched we should decrement the unmatched cards
+      if (matched) {
+        self.unmatchedCards -= 2;
+        // And check for the victory condition
+        if (self.unmatchedCards <= 0) {
+          self.setState({ victory: true });
+        }
+      }
+    }, 2000);
+
   }
 
   render() {
