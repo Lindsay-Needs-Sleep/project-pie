@@ -12,8 +12,10 @@ class MatchingGame extends Component {
     // Build the set of cards
     this.state = {
       cards: _getCardSet(1, 3),
+      victory: false,
       onFaceDownCardClick: this.onFaceDownCardClick.bind(this),
     }
+    this.unmatchedCards = this.state.cards.length;
     this.selectedCard = null;
   }
 
@@ -33,16 +35,37 @@ class MatchingGame extends Component {
     this.selectedCard.foundMatch(matched);
     card.foundMatch(matched);
 
+    // If matched we should decrement the unmatched cards
+    if (matched) {
+      this.unmatchedCards -= 2;
+      // And check for the victory condition
+      if (this.unmatchedCards <= 0) {
+        this.setState({ victory: true });
+      }
+    }
+
     // Reset the selected card so we can start the next pair
     this.selectedCard = null;
   }
 
   render() {
+    let info;
+    if (this.state.victory) {
+      info = <h2>You have found all the pairs! Congrats!!</h2>;
+    } else {
+      info = <div>
+          <h2> Find all pairs of cards with the same number and color!</h2>
+          Note: Match spades with clubs, and hearts with diamonds.
+        </div>;
+    }
+
     return <div>
+      <h1>Card Matching Game</h1>
+      {info}
       {this.state.cards.map((card, index) => {
         return <Card key={index} number={card.number} suit={card.suit} onFaceDownClick={this.state.onFaceDownCardClick} />;
       })}
-    </div>
+    </div>;
   }
 }
 
