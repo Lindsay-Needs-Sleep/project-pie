@@ -10,13 +10,30 @@ class MatchingGame extends Component {
   constructor(props) {
     super(props);
     // Build the set of cards
+    const minNum = props.minNum || 1;
+    const maxNum = props.maxNum || 13;
+    const cards = _getCardSet(minNum, maxNum);
     this.state = {
-      cards: _getCardSet(1, 3),
+      minNum: minNum,
+      maxNum: maxNum,
       victory: false,
-      onFaceDownCardClick: this.onFaceDownCardClick.bind(this),
+      cards: cards,
     }
-    this.unmatchedCards = this.state.cards.length;
+    this.unmatchedCards = cards.length;
     this.selectedCard = null;
+    this.keyNum = 0;
+    
+    this.setMinNum = this.setMinNum.bind(this);
+    this.setMaxNum = this.setMaxNum.bind(this);
+    this.onFaceDownCardClick = this.onFaceDownCardClick.bind(this);
+  }
+
+  setMinNum(event) {
+    this.setState({minNum: parseInt(event.target.value)});
+  }
+
+  setMaxNum(event) {
+    this.setState({maxNum: parseInt(event.target.value)});
   }
 
   onFaceDownCardClick (card) {
@@ -65,11 +82,22 @@ class MatchingGame extends Component {
         </div>;
     }
 
+    let startNum = _createCardNumberOptionList(1, this.state.maxNum);
+    let endNum = _createCardNumberOptionList(this.state.minNum, 13);
+
     return <div>
       <h1>Card Matching Game</h1>
       {info}
+      <br />
+      <div>
+        Select the card start number: 
+        <select onChange={this.setMinNum} value={this.state.minNum}>{startNum}</select>; 
+        <br />
+        Select the card end number: 
+        <select onChange={this.setMaxNum} value={this.state.maxNum}>{endNum}</select>; 
+      </div>
       {this.state.cards.map((card, index) => {
-        return <Card key={index} number={card.number} suit={card.suit} onFaceDownClick={this.state.onFaceDownCardClick} />;
+        return <Card key={index} number={card.number} suit={card.suit} onFaceDownClick={this.onFaceDownCardClick} />;
       })}
     </div>;
   }
@@ -112,4 +140,12 @@ function _shuffle (array) {
     array[j] = temp;
   }
   return array;
+}
+
+function _createCardNumberOptionList (min, max) {
+  let list = [];
+  for (let i = min; i <= max; i++) {
+    list.push(<option value={i} key={i}>{Card.getCardNumberText(i)}</option>);
+  }
+  return list;
 }

@@ -29,7 +29,7 @@ class Card extends React.Component {
   constructor(props) {
     super(props);            
     this.state = { 
-      number: _getCardNumberText(props.number),
+      number: Card.getCardNumberText(props.number),
       suit: props.suit,
       color: _getCardColor(props.suit),
       status: STATUS.FACE_DOWN,
@@ -93,7 +93,7 @@ Card.COLOR = COLOR;
 
 export default Card;
 
-function _getCardNumberText (number) {
+Card.getCardNumberText = function (number) {
   switch (number) {
     case 1:
       return 'A';
