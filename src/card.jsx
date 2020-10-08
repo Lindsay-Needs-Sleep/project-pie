@@ -48,12 +48,13 @@ class Card extends React.Component {
       this.props.onFaceDownClick({
         number: this.props.number, 
         color: this.state.color,
-      }, function (isMatched) {
-        // Change state based on listener response
-        if (isMatched) {
-          self.setState({ status: STATUS.MATCHED });
-        } else {
-          self.setState({ status: STATUS.FACE_DOWN });
+        foundMatch: function (isMatched) {
+          // Change state based on listener response
+          if (isMatched) {
+            self.setState({ status: STATUS.MATCHED });
+          } else {
+            self.setState({ status: STATUS.FACE_DOWN });
+          }
         }
       });
     }
@@ -74,9 +75,11 @@ Card.propTypes = {
   /** 
    * onFaceDownClick: {function(cardInfo, foundMatch)} 
    * Called when the card is clicked if it is faceDown.
-   * cardInfo {object}- contains the card's number and color.
-   * foundMatch {function(bool)} - Should be called with true if the card has 
-   *          been matched.  Else, call with false if the card did not match.
+   * card {object} - contains:
+   *         number {int}
+   *         color {Card.COLOR}
+   *         foundMatch {function(bool)} - Call with true if the card has been
+   *                  matched. Else, call with false to indicate failed match.
    */
   onFaceDownClick: PropTypes.func.isRequired,
 };
