@@ -1,0 +1,59 @@
+.RED {
+  color: #d02f2f;
+}
+.BLACK {
+  color: black;
+}
+
+.SPADES:after {
+  content:"\2660";
+}
+.HEARTS:after {
+  content:"\2665";
+}
+.CLUBS:after {
+  content:"\2663";
+}
+.DIAMONDS:after {
+  content:"\2666";
+}
+.card span:after {
+  font-size: 1.4em;
+}
+
+.FACE_DOWN {
+  background-color: #dca1a1;
+  color: #00000000;
+}
+.MATCHED {
+  border: 1px solid #a29595;
+  background-color: white;
+}
+
+.MATCHED .ok {
+  color: green;
+}
+.ok {
+  position: absolute;
+  margin: 0.2em;
+  top: 0px;
+  right: 0px;
+  font-size: 20px;
+  color: #00000000;
+}
+
+.card {
+  display: inline-flex;
+  position: relative;
+  margin: 9px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 2.5em;
+  height: 3.5em;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 44px;
+}

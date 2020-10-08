@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './card.css';
+import styles from './card.css';
 
 const SUIT = {
   SPADES: 'SPADES',
@@ -62,8 +62,10 @@ class Card extends React.Component {
   }
 
   render() {
-    return <div onClick={this.state.onClick}>
-      {this.state.number} {this.state.suit} {this.state.status}
+    const classes = 'card ' + this.state.color + ' ' + this.state.status;
+    return <div className={classes} onClick={this.state.onClick}>
+      <span className='ok'>OK</span>
+      <span className={this.state.suit}>{this.state.number}</span>
     </div>;
   }
 }
