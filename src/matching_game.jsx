@@ -2,15 +2,17 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Card from './card.jsx';
 
 const e = React.createElement;
 
 class MatchingGame extends Component {
 
+  onFaceDownClick (card, isMatched) {
+  }
+
   render() {
-    return e(
-      'div'
-    );
+    return <Card number={5} suit={Card.SUIT.SPADES} onFaceDownClick={this.onFaceDownClick} />;
   }
 }
 
