@@ -21,11 +21,24 @@ class MatchingGame extends Component {
     }
     this.unmatchedCards = cards.length;
     this.selectedCard = null;
-    this.keyNum = 0;
+    this.cardKeyNum = 0;
     
+    this.resetGame = this.resetGame.bind(this);
     this.setMinNum = this.setMinNum.bind(this);
     this.setMaxNum = this.setMaxNum.bind(this);
     this.onFaceDownCardClick = this.onFaceDownCardClick.bind(this);
+  }
+
+  resetGame () {
+    // Update the cardKeyNum because we want completely new keys for the new cards
+    this.cardKeyNum += this.state.cards.length;
+    const cards = _getCardSet(this.state.minNum, this.state.maxNum);
+    this.setState({
+      victory: false,
+      cards: cards,
+    });
+    this.unmatchedCards = cards.length;
+    this.selectedCard = null;
   }
 
   setMinNum(event) {
@@ -95,9 +108,11 @@ class MatchingGame extends Component {
         <br />
         Select the card end number: 
         <select onChange={this.setMaxNum} value={this.state.maxNum}>{endNum}</select>; 
+        <br />
+        <button onClick={this.resetGame}>Reset Game</button>
       </div>
       {this.state.cards.map((card, index) => {
-        return <Card key={index} number={card.number} suit={card.suit} onFaceDownClick={this.onFaceDownCardClick} />;
+        return <Card key={this.cardKeyNum + index} number={card.number} suit={card.suit} onFaceDownClick={this.onFaceDownCardClick} />;
       })}
     </div>;
   }
