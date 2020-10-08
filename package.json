@@ -1,0 +1,23 @@
+{
+  "name": "ReactMatchingGame",
+  "version": "0.0.0",
+  "description": "Card matching game",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Lindsay-Needs-Sleep@github.com/Lindsay-Needs-Sleep/ReactMatchingGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lindsay-Needs-Sleep/ReactMatchingGame/issues"
+  },
+  "homepage": "https://github.com/Lindsay-Needs-Sleep/ReactMatchingGame#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
