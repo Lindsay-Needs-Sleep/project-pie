@@ -1,8 +1,11 @@
 'use strict';
 
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 const e = React.createElement;
 
-class MatchingGame extends React.Component {
+class MatchingGame extends Component {
 
   render() {
     return e(
